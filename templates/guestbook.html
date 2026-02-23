@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Гостьова книга</h1>
+
+        <form action="/" method="post">
+            <input type="text" name="name" placeholder="Ваше ім'я" required maxlength="100">
+            <textarea name="text" rows="5" placeholder="Ваше повідомлення..." required maxlength="1000"></textarea>
+            <button type="submit">Надіслати відгук</button>
+        </form>
+
+        <h2>Останні повідомлення</h2>
+
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="message">
+            <strong>{{ msg.name }}</strong> написав:
+            <p>{{ msg.text }}</p>
+            <small>{{ msg.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="empty">Поки що немає повідомлень. Станьте першим! ✍️</p>
+        {% endif %}
+    </div>
+</body>
+</html>

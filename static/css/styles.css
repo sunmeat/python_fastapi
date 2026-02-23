@@ -1,0 +1,135 @@
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+form {
+    background: var(--card);
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    margin: 0.6rem 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    padding: 0.9rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+h2 {
+    font-size: 1.6rem;
+    color: var(--text);
+    margin: 2rem 0 1.2rem;
+    text-align: center;
+}
+
+.message {
+    background: var(--card);
+    padding: 1.4rem;
+    margin: 1.2rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--primary);
+    transition: transform 0.15s;
+}
+
+.message:hover {
+    transform: translateY(-3px);
+}
+
+.message strong {
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+.message p {
+    margin: 0.8rem 0;
+    color: var(--text);
+}
+
+.message small {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    display: block;
+    text-align: right;
+}
+
+.empty {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    padding: 3rem 1rem;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    form, .message {
+        padding: 1.2rem;
+    }
+}
