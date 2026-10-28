@@ -1,5 +1,5 @@
-﻿# py -m pip install "fastapi[standard]" uvicorn sqlalchemy pydantic greenlet pydantic-settings
-
+# uv -m pip install "fastapi[standard]" uvicorn sqlalchemy pydantic greenlet pydantic-settings
+from pathlib import Path
 from fastapi import FastAPI, Request, Depends, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -8,7 +8,6 @@ from sqlalchemy.orm import Session
 
 from database import get_db, engine, Base
 from crud import get_messages, create_message
-from schemas import MessageCreate
 
 import webbrowser
 import threading
@@ -19,17 +18,26 @@ app = FastAPI(title="Гостьова книга")
 
 Base.metadata.create_all(bind=engine) # створює всі таблиці в базі даних, які описані в моделях
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+BASE_DIR = Path(__file__).resolve().parent # !!!
 
-templates = Jinja2Templates(directory="templates") # об'єкт для роботи з шаблонами, вказана папка, де вони знаходяться
+app.mount( # !!!
+    "/static",
+    StaticFiles(directory=str(BASE_DIR / "static")),
+    name="static"
+)
+
+templates = Jinja2Templates( # !!!
+    directory=str(BASE_DIR / "templates")
+)
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request, db: Session = Depends(get_db)):
     messages = get_messages(db, limit=100)
+
     return templates.TemplateResponse(
-        "guestbook.html",
-        {
-            "request": request,
+        request=request,
+        name="guestbook.html",
+        context={ # !!!
             "messages": messages,
             "title": "Гостьова книга"
         }
